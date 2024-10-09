@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: message-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: message-app
+  template:
+    metadata:
+      labels:
+        app: message-app
+    spec:
+      containers:
+      - name: message-sender
+        image: aashneyder/message-app:latest
+        command: ["python3", "sender.py"]
+      - name: message-reader
+        image: aashneyder/message-app:latest
+        command: ["python3", "reader.py"]
